@@ -2,6 +2,7 @@
 
 set -e
 
+BUILD_MODE="Debug" # Debug / Release
 SOURCE_DIR="."
 BUILD_DIR="build"
 BUILD_TESTS_OPTION="-DBUILD_TESTS=OFF"
@@ -25,7 +26,7 @@ clean() {
 build() {
     # Run CMake to configure and generate build files
     echo "Configuring the project..."
-    cmake -S "$SOURCE_DIR" -B "$BUILD_DIR" $BUILD_TESTS_OPTION
+    cmake -S "$SOURCE_DIR" -B "$BUILD_DIR" $BUILD_TESTS_OPTION -DCMAKE_BUILD_TYPE="$BUILD_MODE"
 
     # Build the project
     echo "Building the project..."
