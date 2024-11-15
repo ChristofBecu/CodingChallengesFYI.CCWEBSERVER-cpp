@@ -4,7 +4,6 @@
 #include <iostream>
 #include <string>
 
-#include "network/sockets/socket.hpp"
-#include "network/sockets/bindingSocket.hpp"
+#include "network/sockets/libSockets.hpp"
 
 #endif // GLOBAL_ENVIRONMENT_HPP

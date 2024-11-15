@@ -1,9 +1,8 @@
 #include "tests/globalTestEnvironment.hpp"
-#include "network/sockets/socket.hpp"
 
 Network::Socket s = Network::Socket(AF_INET, SOCK_STREAM, 0, 8080, INADDR_ANY);
 
-namespace
+namespace tests
 {
     TEST(socketTest, addressStructure)
     {

@@ -1,7 +1,6 @@
 #include "tests/globalTestEnvironment.hpp"
 
-
-namespace
+namespace tests
 {
     TEST(bindingSocketTest, establishConnectionSucces) {
         Network::BindingSocket bs(AF_INET, SOCK_STREAM, 0, 8080, INADDR_ANY);

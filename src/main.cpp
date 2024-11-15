@@ -1,10 +1,12 @@
 #include "global/globalEnvironment.hpp"
-#include "network/sockets/bindingSocket.hpp"
 
 int main() {
-    Network::BindingSocket socket(AF_INET, SOCK_STREAM, 0, 8080, INADDR_ANY);
+    Network::ListeningSocket socket(AF_INET, SOCK_STREAM, 0, 8080, INADDR_ANY, 10);
 
-    std::cout << socket.getSocket() << std::endl; // Socket: 3
-    
+    std::string address = inet_ntoa(socket.getAddress().sin_addr);
+    int port = ntohs(socket.getAddress().sin_port);
+
+    std::cout << "Listening on " << address << ":" << port << std::endl; // Listening on 0:8080
+    std::cin.get();
     return 0;
 }
