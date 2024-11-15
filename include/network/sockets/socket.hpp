@@ -15,13 +15,19 @@ namespace Network
         struct sockaddr_in address;
         int sock;
         int connection;
+
+        void setReuseAddressOption();
+
     public:
         Socket(int domain, int service, int protocol, int port, u_long interface);
+        
+        void handleSocketError(int testitem);
 
-        // Getters
         struct sockaddr_in getAddress();
         int getSocket();
         int getConnection();
+
+        void setConnection(int domain);
     };
 }
 

@@ -10,6 +10,12 @@ add_library(
     "${SRC_DIR}/network/sockets/socket.cpp"
 )
 
+add_library(
+    bindingSocket 
+    SHARED 
+    "${SRC_DIR}/network/sockets/bindingSocket.cpp"
+)
+
 find_package(GTest REQUIRED)
 
 # if there are any test data files, copy them to the output directory
@@ -19,9 +25,15 @@ add_executable(globalTests
     "${CMAKE_CURRENT_SOURCE_DIR}/globalTests.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/globalTestEnvironment.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/network/sockets/socketTests.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/network/sockets/bindingSocketTests.cpp"
 )
 
-target_link_libraries(globalTests PRIVATE socket GTest::GTest GTest::Main)
+target_link_libraries(
+  globalTests 
+  PRIVATE 
+  socket bindingSocket
+  GTest::GTest GTest::Main
+)
 
 add_test(
   NAME globalTests

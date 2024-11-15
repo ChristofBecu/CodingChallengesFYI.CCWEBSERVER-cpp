@@ -1,13 +1,7 @@
 #include "tests/globalTestEnvironment.hpp"
 #include "network/sockets/socket.hpp"
 
-int domain = AF_INET;
-int service = SOCK_STREAM;
-int protocol = 0;
-int port = 8080;
-u_long interface = INADDR_ANY;
-
-Network::Socket s = Network::Socket(domain, service, protocol, port, interface);
+Network::Socket s = Network::Socket(AF_INET, SOCK_STREAM, 0, 8080, INADDR_ANY);
 
 namespace
 {
@@ -27,9 +21,9 @@ namespace
 
     TEST(socketTest, socketCreationFailure)
     {
-        domain = -1; // invalid address family
+        int domain = -1; // invalid address family
 
-        ASSERT_EXIT(Network::Socket(domain, service, protocol, port, interface), ::testing::ExitedWithCode(1), "socket creation failed");
+        ASSERT_EXIT(Network::Socket(domain, SOCK_STREAM, 0, 8080, INADDR_ANY), ::testing::ExitedWithCode(1), "Error establishing connection");
     }
 
     TEST(socketTest, getSocketReturnsInt) {

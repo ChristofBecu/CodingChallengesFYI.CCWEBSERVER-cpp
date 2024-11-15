@@ -1,8 +1,10 @@
 #include "global/globalEnvironment.hpp"
-#include "network/sockets/socket.hpp"
+#include "network/sockets/bindingSocket.hpp"
 
 int main() {
-    Network::Socket socket(-1, SOCK_STREAM, 0, 8080, INADDR_ANY);
+    Network::BindingSocket socket(AF_INET, SOCK_STREAM, 0, 8080, INADDR_ANY);
+
+    std::cout << socket.getSocket() << std::endl; // Socket: 3
     
     return 0;
 }
