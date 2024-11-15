@@ -11,8 +11,10 @@ The first full formal HTTP specification is HTTP/1.1 - also known as - RFC2616 f
 
 # Build
 
-- Linux only ```./build.sh```
+Linux only : ```./build.sh```
+
+set **BUILD_MODE** in build.sh to **debug** to be able to reuse the address before the operating system releases it
 
 # Usage
 
-
+```./ccwebserver```
