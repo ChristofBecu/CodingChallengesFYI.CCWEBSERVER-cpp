@@ -48,6 +48,13 @@ file(GLOB_RECURSE SOURCES "${SRC_DIR}/*.cpp")
 set(MAIN_EXE "${PROJECT_NAME}")
 add_executable(${MAIN_EXE} ${SOURCES})
 
+# Copy www directory to the output location after build
+add_custom_command(TARGET ccwebserver POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_SOURCE_DIR}/www
+        ${CMAKE_BINARY_DIR}/output
+)
+
 # Tests
 option(BUILD_TESTS "Build tests" OFF)
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
