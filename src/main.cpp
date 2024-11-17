@@ -1,7 +1,8 @@
 #include "global/globalEnvironment.hpp"
 #include <unistd.h>
 
-int main() {
+int main()
+{
     try
     {
         Network::ListeningSocket socket(AF_INET, SOCK_STREAM, 0, 8080, INADDR_ANY, 10);
@@ -14,7 +15,7 @@ int main() {
         std::cin.get();
         close(socket.getSocket());
     }
-    catch(const std::exception& e)
+    catch (const std::exception &e)
     {
         std::cerr << e.what() << '\n';
 

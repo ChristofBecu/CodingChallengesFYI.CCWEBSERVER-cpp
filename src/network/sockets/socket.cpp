@@ -39,9 +39,9 @@ Network::Socket::Socket(int domain, int service, int protocol, int port, u_long 
 #endif
 }
 
-void Network::Socket::handleSocketError(int item)
+void Network::Socket::handleSocketError(int socketItem)
 {
-    if (item < 0)
+    if (socketItem < 0)
     {
         close(sock);
         throw std::runtime_error("Error establishing connection");

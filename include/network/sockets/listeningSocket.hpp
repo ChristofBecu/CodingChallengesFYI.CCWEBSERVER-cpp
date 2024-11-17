@@ -11,6 +11,7 @@ namespace Network
     private:
         int backlog;
         int listening;
+
     public:
         ListeningSocket(int domain, int service, int protocol, int port, u_long interface, int bklg);
 
@@ -20,4 +21,4 @@ namespace Network
     };
 }
 
-#endif //NETWORK_LISTENINGSOCKET_HPP
+#endif // NETWORK_LISTENINGSOCKET_HPP

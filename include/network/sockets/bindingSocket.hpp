@@ -9,7 +9,6 @@ namespace Network
     class BindingSocket : public Socket
     {
     private:
-        
     public:
         BindingSocket(int domain, int service, int protocol, int port, u_long interface);
 

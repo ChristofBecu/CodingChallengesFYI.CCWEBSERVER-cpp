@@ -5,7 +5,8 @@
 
 #include "global/globalEnvironment.hpp"
 
-class GlobalTestEnvironment : public ::testing::Environment {
+class GlobalTestEnvironment : public ::testing::Environment
+{
 public:
     void SetUp() override;
     void TearDown() override;

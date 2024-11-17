@@ -20,7 +20,7 @@ namespace Network
 
     public:
         Socket(int domain, int service, int protocol, int port, u_long interface);
-        
+
         void handleSocketError(int testitem);
 
         struct sockaddr_in getAddress();
@@ -31,4 +31,4 @@ namespace Network
     };
 }
 
-#endif //NETWORK_SOCKET_HPP
+#endif // NETWORK_SOCKET_HPP
