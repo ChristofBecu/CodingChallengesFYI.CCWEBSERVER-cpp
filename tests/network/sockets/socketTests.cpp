@@ -22,24 +22,34 @@ namespace tests
     {
         int domain = -1; // invalid address family
 
-        ASSERT_EXIT(Network::Socket(domain, SOCK_STREAM, 0, 8080, INADDR_ANY), ::testing::ExitedWithCode(1), "Error establishing connection");
+        ASSERT_THROW(Network::Socket(domain, SOCK_STREAM, 0, 8080, INADDR_ANY), std::runtime_error);
     }
 
-    TEST(socketTest, getSocketReturnsInt) {
+    TEST(socketTest, getSocketReturnsInt)
+    {
         int sock = s.getSocket();
 
         ASSERT_EQ(typeid(sock), typeid(int));
     }
 
-    TEST(socketTest, getAddressReturnsStruct) {
+    TEST(socketTest, getAddressReturnsStruct)
+    {
         struct sockaddr_in address = s.getAddress();
 
         ASSERT_EQ(typeid(address), typeid(struct sockaddr_in));
     }
 
-    TEST(socketTest, getConnectionReturnsInt) {
+    TEST(socketTest, getConnectionReturnsInt)
+    {
         int connection = s.getConnection();
 
         ASSERT_EQ(typeid(connection), typeid(int));
+    }
+
+    TEST(socketTest, handleSocketErrorThrows)
+    {
+        Network::Socket testSocket(AF_INET, SOCK_STREAM, 0, 8080, INADDR_ANY);
+
+        ASSERT_THROW(testSocket.handleSocketError(-1), std::runtime_error);
     }
 }

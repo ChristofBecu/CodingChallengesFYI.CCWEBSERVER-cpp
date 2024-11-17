@@ -13,7 +13,7 @@
  * The constructor initializes a socket with the specified domain, service, protocol, port, and interface.
  * It sets up the address structure, creates a new socket, and tests the connection.
  * If compiled with DEBUG, it also sets the reuse address option.
- * 
+ *
  * @param domain The communication domain (e.g., AF_INET for IPv4).
  * @param service The type of service (e.g., SOCK_STREAM for TCP).
  * @param protocol The protocol to be used (e.g., IPPROTO_TCP for TCP).
@@ -32,19 +32,19 @@ Network::Socket::Socket(int domain, int service, int protocol, int port, u_long 
     sock = socket(domain, service, protocol);
 
     handleSocketError(sock);
-    
-    #ifdef DEBUG
-        std::cout << "setting reuse address option" << std::endl;
-        setReuseAddressOption();
-    #endif
+
+#ifdef DEBUG
+    std::cout << "setting reuse address option" << std::endl;
+    setReuseAddressOption();
+#endif
 }
 
 void Network::Socket::handleSocketError(int item)
 {
     if (item < 0)
     {
-        perror("Error establishing connection");
-        exit(EXIT_FAILURE);
+        close(sock);
+        throw std::runtime_error("Error establishing connection");
     }
 }
 
@@ -60,12 +60,11 @@ void Network::Socket::handleSocketError(int item)
  */
 void Network::Socket::setReuseAddressOption()
 {
-    int opt = 1;
+    int opt = -1;
     if (setsockopt(sock, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt)) < 0)
     {
-        perror("setsockopt(SO_REUSEADDR) failed");
         close(sock);
-        exit(EXIT_FAILURE);
+        throw std::runtime_error("setsockopt(SO_REUSEADDR) failed");
     }
 }
 
@@ -87,6 +86,6 @@ int Network::Socket::getConnection()
 
 // Setters
 void Network::Socket::setConnection(int domain)
-{   
+{
     connection = domain;
 }
