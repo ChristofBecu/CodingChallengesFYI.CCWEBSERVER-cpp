@@ -6,6 +6,8 @@
 #include <netinet/in.h>
 #include <cstdlib>
 #include <arpa/inet.h>
+#include <iostream>
+#include <unistd.h>
 
 namespace Network
 {

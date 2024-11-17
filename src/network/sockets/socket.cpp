@@ -5,8 +5,6 @@
  */
 
 #include "network/sockets/socket.hpp"
-#include <iostream>
-#include <unistd.h>
 
 /**
  * @brief Constructor for the Socket class.

@@ -6,7 +6,6 @@
  */
 
 #include "network/sockets/bindingSocket.hpp"
-#include <iostream>
 
 /**
  * @brief Constructor for the BindingSocket class.
