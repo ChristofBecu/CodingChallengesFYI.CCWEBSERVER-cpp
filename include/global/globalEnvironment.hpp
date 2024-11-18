@@ -5,5 +5,6 @@
 #include <string>
 
 #include "network/sockets/libSockets.hpp"
+#include "network/servers/libServers.hpp"
 
 #endif // GLOBAL_ENVIRONMENT_HPP

@@ -1,23 +1,15 @@
-#include "global/globalEnvironment.hpp"
-#include <unistd.h>
+#include "network/servers/webServer.hpp"
 
 int main()
 {
     try
     {
-        Network::ListeningSocket socket(AF_INET, SOCK_STREAM, 0, 8080, INADDR_ANY, 10);
-
-        std::string address = inet_ntoa(socket.getAddress().sin_addr);
-        int port = ntohs(socket.getAddress().sin_port);
-        std::cout << "listening : " << socket.getListening() << std::endl; // listening : 0
-
-        std::cout << "Listening on " << address << ":" << port << std::endl; // Listening on 0:8080
-        std::cin.get();
-        close(socket.getSocket());
+        int port = 8080;
+        Network::WebServer server(port);
     }
     catch (const std::exception &e)
     {
-        std::cerr << e.what() << '\n';
+        std::cerr << e.what() << std::endl;
 
         return EXIT_FAILURE;
     }
