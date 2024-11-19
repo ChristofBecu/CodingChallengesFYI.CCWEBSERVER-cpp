@@ -19,14 +19,14 @@ showUsage() {
 
 clean() {
     echo "Cleaning build artifacts..."
-    rm -rf build/
+    rm -rf "$BUILD_DIR"
     echo "Clean complete."
 }
 
 build() {
     # Run CMake to configure and generate build files
     echo "Configuring the project..."
-    cmake -S "$SOURCE_DIR" -B "$BUILD_DIR" $BUILD_TESTS_OPTION -DCMAKE_BUILD_TYPE="$BUILD_MODE"
+    cmake -S "$SOURCE_DIR" -B "$BUILD_DIR" -DCMAKE_BUILD_TYPE="$BUILD_MODE" $BUILD_TESTS_OPTION
 
     # Build the project
     echo "Building the project..."
@@ -34,16 +34,15 @@ build() {
 }
 
 test() {
+    # Enable building tests
+    BUILD_TESTS_OPTION="-DBUILD_TESTS=ON"
+    build
     echo "Running tests..."
     cd "$BUILD_DIR"
     ctest -VV
 }
 
-if [ $# -eq 0 ]; then
-    showUsage
-    exit 0
-fi
-
+# Parse command line arguments
 case "$1" in
     -h|--help)
         showUsage
@@ -53,8 +52,6 @@ case "$1" in
         clean
         ;;
     -t|--test)
-        BUILD_TESTS_OPTION="-DBUILD_TESTS=ON"
-        build
         test
         ;;
     -b|--build)
@@ -62,6 +59,7 @@ case "$1" in
         ;;
     *) 
         echo "Unknown option: $1"
+        showUsage
         exit 1
         ;;
 esac
