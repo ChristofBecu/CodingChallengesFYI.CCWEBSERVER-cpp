@@ -18,6 +18,7 @@ namespace Http
 
         std::string request;
         std::string path;
+        void setIndexUri();
 
     public:
         Request(std::string request);

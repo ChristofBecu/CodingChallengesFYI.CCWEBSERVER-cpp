@@ -18,10 +18,7 @@ Http::Request::Request(std::string buffer)
     this->requestURI = requestVector[1];
     this->requestProtocol = requestVector[2];
 
-    if (this->requestURI == "/")
-    {
-        this->requestURI = "/index.html";
-    }
+    setIndexUri();
 }
 
 std::string Http::Request::getUri()
@@ -37,4 +34,12 @@ std::string Http::Request::getMethod()
 std::string Http::Request::getProtocol()
 {
     return requestProtocol;
+}
+
+void Http::Request::setIndexUri()
+{
+    if (this->requestURI == "/")
+    {
+        this->requestURI = "/index.html";
+    }
 }
