@@ -11,6 +11,9 @@ namespace Http
     {
     private:
         std::string httpResponse;
+        void returnStandard404Page(std::string &uri, std::ifstream &file);
+        void set404Uri(std::ifstream &file, Http::StatusCodes::Code &code, std::string &uri);
+        void createResponse(std::string &protocol, Http::StatusCodes::Code code, std::string &responseMessage, std::ifstream &file);
 
     public:
         Response(std::string method, std::string uri, std::string protocol);
