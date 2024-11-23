@@ -25,6 +25,7 @@ namespace Http
         std::string getUri();
         std::string getMethod();
         std::string getProtocol();
+        bool isSSL = false;
     };
 }
 
