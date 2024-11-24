@@ -23,6 +23,7 @@ namespace Network
     public:
         Socket(int domain, int service, int protocol, int port, u_long interface);
 
+        // virtual int establishConnection(int sock, struct sockaddr_in address) = 0;
         void handleSocketError(int testitem);
 
         struct sockaddr_in getAddress();
