@@ -1,14 +1,28 @@
 #include "network/servers/webServer.hpp"
 
+bool isSSL = false;
+
 Network::WebServer::WebServer(int port) : Server(AF_INET, SOCK_STREAM, 0, port, INADDR_ANY, 10)
 {
     launch();
 }
 
+Network::WebServer::~WebServer()
+{
+    // Close the socket if it is open
+    if (newSocket >= 0)
+    {
+        std::cout << "Closing socket" << std::endl;
+        close(newSocket);
+    }
+}
+
 void Network::WebServer::accepter()
 {
+    isSSL = false;
     struct sockaddr_in address = getSocket()->getAddress();
     int addrlen = sizeof(address);
+
     newSocket = accept(getSocket()->getSocket(), (struct sockaddr *)&address, (socklen_t *)&addrlen);
     read(newSocket, buffer, 30000);
 }
@@ -16,6 +30,13 @@ void Network::WebServer::accepter()
 void Network::WebServer::handler()
 {
     Http::Request request(buffer);
+    if (request.isSSL)
+    {
+        std::cerr << "HTTPS is not supported" << std::endl;
+        isSSL = true;
+        // close(newSocket);
+        return;
+    }
 
     std::string method = request.getMethod();
     std::string uri = request.getUri();
@@ -36,14 +57,17 @@ void Network::WebServer::handler()
 
 void Network::WebServer::responder()
 {
-    send(newSocket, httpResponse.c_str(), httpResponse.length(), 0);
-    close(newSocket);
+    if (!isSSL)
+    {
+        send(newSocket, httpResponse.c_str(), httpResponse.length(), 0);
+        close(newSocket);
+    }
 }
 
 void Network::WebServer::launch()
 {
     struct sockaddr_in address = getSocket()->getAddress();
-    std::cout << "Server listening for connections on " << inet_ntoa(address.sin_addr) << ":" << ntohs(address.sin_port) << std::endl;
+    std::cout << "Server listening for connections on http://" << inet_ntoa(address.sin_addr) << ":" << ntohs(address.sin_port) << std::endl;
 
     while (true)
     {

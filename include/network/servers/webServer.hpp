@@ -24,6 +24,7 @@ namespace Network
 
     public:
         WebServer(int port);
+        ~WebServer();
     };
 }
 
