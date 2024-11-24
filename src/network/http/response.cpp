@@ -2,6 +2,10 @@
 
 Http::Response::Response(std::string method, std::string uri, std::string protocol)
 {
+    if (method == "" && uri == "" && protocol == "")
+    {
+        return;
+    }
     Http::StatusCodes::Code code;
 
     std::string responseCode;
