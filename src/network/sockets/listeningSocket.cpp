@@ -26,7 +26,6 @@ Network::ListeningSocket::ListeningSocket(int domain, int service, int protocol,
 {
     backlog = bklg;
     startListening();
-    handleSocketError(listening);
 };
 
 /**
