@@ -1,10 +1,31 @@
 #!/bin/bash
 
-# URL to send requests to
-URL="http://0.0.0.0:8011"
+# Default port
+PORT=8008
 
-# Number of requests
+# Parse command-line arguments
+# Default port
+PORT=8011
 NUM_REQUESTS=1000
+
+# Parse command-line arguments
+while getopts "p:n:h" opt; do
+  case $opt in
+    p)
+      PORT=$OPTARG
+      ;;
+    n)
+      NUM_REQUESTS=$OPTARG
+      ;;
+    h)
+      echo "Usage: $0 [-p port] [-n number_of_requests]"
+      exit 1
+      ;;
+  esac
+done
+
+# URL to send requests to
+URL="http://0.0.0.0:$PORT"
 
 # Function to send a request
 send_request() {
