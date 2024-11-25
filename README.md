@@ -13,8 +13,29 @@ The first full formal HTTP specification is HTTP/1.1 - also known as - RFC2616 f
 
 Linux only : ```./build.sh```
 
-set **BUILD_MODE** in build.sh to **debug** to be able to reuse the address before the operating system releases it
+Change **BUILD_MODE** (in build.sh)
+- None: 149K
+- Debug: 723K
+    - enables SO_REUSEADDR option on the socket, address can be reused before the operating system releases the port.
+    - prints info to stdout.
+- RelWithDebInfo: 919K
+- MinSizeRel: 55K
 
 # Usage
 
-```./ccwebserver```
+```
+./ccwebserver
+./ccwebserver -h
+./ccwebserver -p 80
+```
+
+# Test
+```
+build.sh -t
+```
+
+# Multiple requests
+run script ```doRequests.sh```
+- results: 
+    - 1000 requests done in 1971 - 2632 milliseconds
+    - 5000 requests while doing requests in browser without lag
