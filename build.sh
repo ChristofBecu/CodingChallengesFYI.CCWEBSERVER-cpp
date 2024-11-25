@@ -2,7 +2,7 @@
 
 set -e
 
-BUILD_MODE="Debug" # Debug / Release
+BUILD_MODE="MinSizeRel" # Debug / Release / RelWithDebInfo / MinSizeRel / None
 SOURCE_DIR="."
 BUILD_DIR="build"
 BUILD_TESTS_OPTION="-DBUILD_TESTS=OFF"
