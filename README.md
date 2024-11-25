@@ -11,7 +11,7 @@ The first full formal HTTP specification is HTTP/1.1 - also known as - RFC2616 f
 
 # Build
 
-Linux only : ```./build.sh```
+Linux only : ```./build.sh -b```
 
 Change **BUILD_MODE** (in build.sh)
 - None: 149K
@@ -26,7 +26,7 @@ Change **BUILD_MODE** (in build.sh)
 ```
 ./ccwebserver
 ./ccwebserver -h
-./ccwebserver -p 80
+./ccwebserver -p [port]
 ```
 
 # Test
@@ -35,7 +35,10 @@ build.sh -t
 ```
 
 # Multiple requests
-run script ```doRequests.sh```
-- results: 
-    - 1000 requests done in 1971 - 2632 milliseconds
-    - 5000 requests while doing requests in browser without lag
+run script ```doRequests.sh -p [port] -n [number of requests] -h [help]```
+- results:
+    - 10 request done in 21 milliseconds
+    - 20 requests done in 35 milliseconds
+    - 50 requests done in 88 milliseconds
+    - 1000 requests done in 1278 - 2632 milliseconds
+    - 5000 requests while making requests in browser without lag
